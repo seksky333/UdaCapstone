@@ -21,6 +21,10 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            make install
+      - run:
+          name: test
+          command: |
             make doTest
   lint:
     docker:
@@ -29,6 +33,10 @@ jobs:
       - checkout
       - run:
           name: install dependencies
+          command: |
+            make install
+      - run:
+          name: lint
           command: |
             make lint
 
