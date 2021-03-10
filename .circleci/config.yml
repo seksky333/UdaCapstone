@@ -1,0 +1,42 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1.0
+
+jobs:
+  setup:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            make install
+  test:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            make doTest
+  lint:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            make lint
+
+workflows:
+  lifecycle_workflow:
+    jobs:
+      - setup
+      - test:
+          requires: [setup]
+      - lint:
+          requires: [test]
