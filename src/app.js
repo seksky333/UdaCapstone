@@ -10,6 +10,6 @@ const app = express();
 /*
 Routes
 */
-app.use('/api/v1/helloWorld', helloWorldRouter);
+app.use('/', helloWorldRouter);
 
 module.exports = app;

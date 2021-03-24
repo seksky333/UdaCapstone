@@ -12,11 +12,16 @@ COPY package*.json ./
 ## Step 3:
 # Install packages
 # hadolint ignore=DL3013
-RUN npm -i
+RUN npm i
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
 
 ## Step 4:
-# Expose port 80
-EXPOSE 3000
+# Expose port 8080
+EXPOSE 8080
 
 ## Step 5:
 # Run app.py at container launch
