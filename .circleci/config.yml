@@ -4,7 +4,7 @@ orbs:
   node: circleci/node@4.1.0
 
 jobs:
-  setup:
+  build:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -43,9 +43,9 @@ jobs:
 workflows:
   lifecycle_workflow:
     jobs:
-      - setup
+      - build
       - test:
-          requires: [setup]
+          requires: [build]
       - lint:
           requires: [test]
           filters:
