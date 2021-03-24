@@ -1,4 +1,4 @@
-FROM node:14
+FROaM node:14
 
 ## Step 1:
 # Create a working directory
