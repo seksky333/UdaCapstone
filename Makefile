@@ -2,6 +2,7 @@ install:
 	npm i
 	
 lint:
+	hadolint Dockerfile
 	npm run lint
 
 doTest:

@@ -48,3 +48,6 @@ workflows:
           requires: [setup]
       - lint:
           requires: [test]
+          filters:
+            branches:
+              only: [master]
