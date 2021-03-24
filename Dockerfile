@@ -1,4 +1,4 @@
-FRsOM node:14
+FROM node:14
 
 ## Step 1:
 # Create a working directory
