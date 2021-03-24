@@ -50,4 +50,4 @@ workflows:
           requires: [test]
           filters:
             branches:
-              only: [master]
+              only: [main]
