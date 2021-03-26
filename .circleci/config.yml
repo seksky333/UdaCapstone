@@ -71,7 +71,6 @@ jobs:
           name: eksctl
           command: |
             kubectl version --short --client
-            aws eks update-kubeconfig --name work-cluster
             eksctl version
             kubectl get services
             kubectl get pods
