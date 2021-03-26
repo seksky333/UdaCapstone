@@ -3,6 +3,9 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   eks: circleci/aws-eks@1.0.3
+  aws-eks: circleci/aws-eks@0.2.3
+  kubernetes: circleci/kubernetes@0.4.0
+
 
 jobs:
   build:
@@ -48,7 +51,7 @@ jobs:
             make lint
   deploy:
     executor:
-      name: eks/default
+      name: aws-eks/default
     steps:
       - checkout
       - run:
