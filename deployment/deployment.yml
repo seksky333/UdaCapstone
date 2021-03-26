@@ -22,7 +22,7 @@ spec:
           image: seksky333/udacapstone
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
 
 ---
 apiVersion: v1
@@ -30,9 +30,10 @@ kind: Service
 metadata:
   name: udacapstone
 spec:
+  type: LoadBalancer
   selector:
     app: udacapstone
   ports:
     - port: 80
-      targetPort: 49161
-  type: LoadBalancer
+      targetPort: 3000
+      protocol: TCP
