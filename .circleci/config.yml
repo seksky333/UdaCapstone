@@ -75,6 +75,8 @@ jobs:
             eksctl version
             kubectl get services
             kubectl get pods
+            kubectl get nodes
+            kubectl get pods --all-namespaces
 
 
 workflows:
