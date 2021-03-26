@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
-  eks: circleci/aws-eks@1.0.3
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@0.11.2
 
@@ -51,10 +50,15 @@ jobs:
           command: |
             make lint
   deploy:
-    executor:
-      name: aws-eks/python3
+    docker:
+      # Docker image here that supports AWS CLI
+      - image: amazon/aws-cli
     steps:
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            yum install -y tar gzip
       - kubernetes/install-kubectl
       - attach_workspace:
           at: .
@@ -67,6 +71,7 @@ jobs:
           name: eksctl
           command: |
             kubectl version --short --client
+            aws eks update-kubeconfig
             eksctl version
             kubectl get services
             kubectl get pods
