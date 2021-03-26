@@ -81,20 +81,12 @@ jobs:
             kubectl get pods
             kubectl get nodes
             kubectl get pods --all-namespaces
-      - run: 
-          name: run docker
+      - run:
+          name: deploy new image
           command: |
-              ./run_docker.sh
-      - run: 
-          name: upload docker
-          command: |
-              ./upload_docker.sh
-      # - run:
-      #     name: deploy new image
-      #     command: |
-      #       kubectl set image deployment/udacapstone app=seksky333/udacapstone:v1.1.0
-      #       kubectl rollout status deployment/udacapstone
-      #       kubectl get deployment udacapstone
+            kubectl set image deployment/udacapstone app=seksky333/udacapstone:v1.1.0
+            kubectl rollout status deployment/udacapstone
+            kubectl get deployment udacapstone
 
 
 workflows:
