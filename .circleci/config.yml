@@ -45,6 +45,18 @@ jobs:
           name: lint
           command: |
             make lint
+  deploy:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: eksctl
+          command: |
+            eksctl version
+
 
 workflows:
   lifecycle_workflow:
