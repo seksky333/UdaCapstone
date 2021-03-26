@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
+  eks: circleci/aws-eks@1.0.3
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@0.11.2
 
@@ -58,8 +59,14 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Install eksctl
+          command: |
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            mv /tmp/eksctl /usr/local/bin
+      - run:
           name: eksctl
           command: |
+            kubectl version --short --client
             eksctl version
             kubectl get services
             kubectl get pods
