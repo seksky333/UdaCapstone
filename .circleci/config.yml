@@ -66,6 +66,8 @@ workflows:
           requires: [build]
       - lint:
           requires: [test]
+      - deploy:
+          requires: [lint]
           filters:
             branches:
               only: [main]
