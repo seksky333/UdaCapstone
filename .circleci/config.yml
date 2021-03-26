@@ -68,7 +68,11 @@ jobs:
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             mv /tmp/eksctl /usr/local/bin
       - run:
-          name: eksctl
+          name: Check AWS credential
+          command: |
+            aws sts get-caller-identity
+      - run:
+          name: check eksctl
           command: |
             kubectl version --short --client
             aws eks --region ap-southeast-2 update-kubeconfig --name work-cluster
@@ -77,8 +81,20 @@ jobs:
             kubectl get pods
             kubectl get nodes
             kubectl get pods --all-namespaces
-            aws sts get-caller-identity
-
+      - run: 
+          name: run docker
+          command: |
+              ./run_docker.sh
+      - run: 
+          name: upload docker
+          command: |
+              ./upload_docker.sh
+      # - run:
+      #     name: deploy new image
+      #     command: |
+      #       kubectl set image deployment/udacapstone app=seksky333/udacapstone:v1.1.0
+      #       kubectl rollout status deployment/udacapstone
+      #       kubectl get deployment udacapstone
 
 
 workflows:
