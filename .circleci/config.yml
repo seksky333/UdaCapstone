@@ -2,11 +2,12 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
+  eks: circleci/aws-eks@1.0.3
 
 jobs:
   build:
-    docker:
-      - image: circleci/node:13.8.0
+    executor:
+      name: node/default
     steps:
       - checkout
       - run:
@@ -18,8 +19,8 @@ jobs:
           paths:
             - node_modules
   test:
-    docker:
-      - image: circleci/node:13.8.0
+    executor:
+      name: node/default
     steps:
       - checkout
       - attach_workspace:
@@ -29,8 +30,8 @@ jobs:
           command: |
             make doTest
   lint:
-    docker:
-      - image: circleci/node:13.8.0
+    executor:
+      name: node/default
     steps:
       - checkout
       - attach_workspace:
@@ -46,8 +47,8 @@ jobs:
           command: |
             make lint
   deploy:
-    docker:
-      - image: circleci/aws-eks:1.0.3
+    executor:
+      name: eks/default
     steps:
       - checkout
       - run:
