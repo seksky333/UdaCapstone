@@ -62,6 +62,8 @@ jobs:
           name: eksctl
           command: |
             eksctl version
+            kubectl get services
+            kubectl get pods
 
 
 workflows:
